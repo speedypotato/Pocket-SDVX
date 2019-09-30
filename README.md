@@ -3,6 +3,8 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 
 ## under construction
 
+![Pocket Voltex](IMAGES/1.jpg)
+
 ## Features
 - Super small - About 7" x 4" and a little over 1/2" high (About 1-1/2" including knobs)
 - 7 Gateron Red Keyswitches (Start, BT-A, BT-B, BT-C, BT-D, FX-L, FX-R)
@@ -16,17 +18,17 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Acts as a gamepad or keyboard/mouse.  While plugging in, hold BTN-A for 3-4s for gamepad mode.  Hold BTN-B instead for keyboard/mouse mode.
 - USB-C Input
 
-### Video Guide
+## Video Guide
 - A really low-quality video guide series I made at 4:00am: https://www.youtube.com/playlist?list=PLSlCMOwxujV7-DYrM4eC2Sb4_rMR5udEE .
   - Perhaps it will be useful to some of you.
 
-### General Assembly Instructions
+## General Assembly Instructions
 - 3D print case and cover
 - Cut vinyls: layer1, layer2, cover
 - Weed vinyls(remove excess).
 - Clean face with rubbing/isopropyl alcohol and apply skin using transfer tape.  Apply layer1, then layer2.  Then apply cover.
-  - Note: Shine a flashlight on the case's corner to more easily see where to line up the skin.  I make my skins every so slightly smaller than the actual face for more leeway.  The skin's width is ---- (scale the skin proportionally).
-  - Note 2: I have lazily taken cover and scaled it down.  Thus, the spacing around the edge is probably a bit uneven.  Apply to the best of your ability.  The skin's width is ---- (scale the skin proportionally).
+  - Note: Shine a flashlight on the case's corner to more easily see where to line up the skin.  I make my skins every so slightly smaller than the actual face for more leeway.  The skin's width is ~169mm (scale the skin proportionally).
+  - Note 2: I have lazily taken cover and scaled it down.  Thus, the spacing around the edge is probably a bit uneven.  Apply to the best of your ability.  The skin's width is ~165mm (scale the skin proportionally).
 - Insert Gateron switches and secure each corner of the switch with hot glue on the inside.  See video Part 1 for details.
 - Using a soldering iron, tin all contacts on the Gateron switches.
 - Wire up all the common/ground for the switches and the encoders.  See video Part 2 for details.
@@ -55,9 +57,9 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Wipe circles on the bottom with rubbing/isopropyl alcohol.  Apply adhesive rubber feet.
 - Mount keycaps.  See video Part 8 for details.
 - Mount knobs.  Use the arduino pin headers as a spacer on each side so the knobs are the same height and don't rub on the encoder nub.
-#### Done.  Enjoy!!
+### Done.  Enjoy!!
 
-### Parts Required:
+## Parts Required:
 - 1x 3D Printed Case (1.2mm walls, top, bottom layers; 20-25% infill minimum)
 - 1x 3D Printed Cover
 - 1x layer1 Vinyl Skin
@@ -75,16 +77,17 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - 1x M3x5 Screw
 - Cat5e Cable (~2 feet, strip it open and take a twist of wire)
 - Hot Glue
+- Solder
 - USB C cable (preferably one with deep insertion)
 
-### Recommended Tools
+## Recommended Tools
 - Temperature Controlled Soldering Iron
 - Hot Glue Gun
 - Needle Nose Pliers
 - Screwdriver/Allen Key (for M3 screw)
 - Eye Protection + Safety Mask
 
-### Links I used to make the first batch of 10
+## Links I used to make the first batch of 10
 - Gateron Red Keyswitches: https://kbdfans.com/collections/gateron-swithes/products/gateron-swtich-3pin-or-5pin?variant=35765199373
 - Bourns PEC16-2015F-N0024 Encoders: https://www.mouser.com/ProductDetail/Bourns/PEC16-2015F-N0024?qs=sGAEpiMZZMsWp46O%252Bq11WTXwm4kPVvHwmPh3cKfowck%3D
 - 1x1 G20 Keycap (BCT): https://pimpmykeyboard.com/g20-1-space-pack-of-10/
@@ -97,14 +100,16 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - M3x5 Screw: https://www.ebay.com/itm/20X-M3-3-80mm-Round-Pan-Head-Phillips-Screws-304-Stainless-Steel-Machine-Screws/302237442873?
 - USB C cable (WARNING: CONTAINS 10): https://www.aliexpress.com/item/33032210292.html
 
-### Miscellaneous Info
+## Miscellaneous Info
 
-### Thanks to:
+![Gold Pocket Voltex](IMAGES/2.jpg)
+
+## Thanks to:
 - Cammy for helping me build my first minicon.  The Pocket SDVX uses a slightly modified version of his firmware.
 - Everyone in the Cons & Stuff Discord channel.
 - mon for his initial development of the Pocket Voltex.
 - The 10 people who purchased my first exclusive batch of Pocket SDVXs!  Thanks to you guys, I can get a full-size controller as well!
 
-### Links to other GitHubs
+## Links to other GitHubs
 - https://github.com/camprevail/pocketvtx
 - https://github.com/mon/PocketVoltex
