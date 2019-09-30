@@ -3,7 +3,9 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 
 ## under construction
 
-![Pocket Voltex](IMAGES/1.jpg)
+![Pocket SDVX](IMAGES/1.jpg)
+
+![Pocket SDVX](IMAGES/5.jpg)
 
 ## Features
 - Super small - About 7" x 4" and a little over 1/2" high (About 1-1/2" including knobs)
@@ -101,14 +103,21 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - USB C cable (WARNING: CONTAINS 10): https://www.aliexpress.com/item/33032210292.html
 
 ## Miscellaneous Info
+- If the rubber feet aren't doing their job, they're probably dusty.  Wipe them down with a little bit of rubbing alcohol.
+![Creative Commons](IMAGES/6.png)
+- This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 
-![Gold Pocket Voltex](IMAGES/2.jpg)
+![Gold Pocket SDVX](IMAGES/2.jpg)
 
-## Thanks to:
+## Thanks To
 - Cammy for helping me build my first minicon.  The Pocket SDVX uses a slightly modified version of his firmware.
 - Everyone in the Cons & Stuff Discord channel.
 - mon for his initial development of the Pocket Voltex.
 - The 10 people who purchased my first exclusive batch of Pocket SDVXs!  Thanks to you guys, I can get a full-size controller as well!
+
+![10 Pocket SDVX](IMAGES/3.jpg)
+
+![10 Pocket SDVX 2](IMAGES/4.jpg)
 
 ## Links to other GitHubs
 - https://github.com/camprevail/pocketvtx
