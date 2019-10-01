@@ -122,3 +122,6 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 ## Links to other GitHubs
 - https://github.com/camprevail/pocketvtx
 - https://github.com/mon/PocketVoltex
+
+## Possible To-Do List
+- LED lights
