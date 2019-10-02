@@ -1,5 +1,5 @@
 # Pocket-SDVX
-A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Based off of mon's and Cammy's Pocket Voltex/VTX!
+A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Based off of mon's Pocket Voltex and Cammy's pocketvtx!
 
 ## under construction
 
@@ -82,11 +82,14 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Solder
 - USB C cable (preferably one with deep insertion)
 
-## Recommended Tools
+## Recommended Tools/Etc.
 - Temperature Controlled Soldering Iron
 - Hot Glue Gun
 - Needle Nose Pliers
-- Screwdriver/Allen Key (for M3 screw)
+- Phillips Screwdriver (if you use a phillips head M3 screw)
+- Allen Key (for knobs' grubscrew, M3 screw if you have a hex head)
+- Rubbing/Isopropyl Alcohol
+- Microfiber Cloth (for cleaning w/ alcohol)
 - Eye Protection + Safety Mask
 
 ## Links I used to make the first batch of 10
@@ -104,8 +107,9 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 
 ## Miscellaneous Info
 - If the rubber feet aren't doing their job, they're probably dusty.  Wipe them down with a little bit of rubbing alcohol.
-![Creative Commons](IMAGES/6.png)
+- Encoders have an initial break-in period.  If they are stiff, rotate them for a few minutes to break them in.
 - This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+![Creative Commons](IMAGES/6.png)
 
 ![Gold Pocket SDVX](IMAGES/2.jpg)
 
@@ -125,3 +129,6 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 
 ## Possible To-Do List
 - LED lights
+- Increase spacing between BTN and FX
+- Actually make a cover vinyl that fits right
+- M3 Nut hole on cover
