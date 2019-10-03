@@ -64,9 +64,9 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 ## Parts Required:
 - 1x 3D Printed Case (1.2mm walls, top, bottom layers; 20-25% infill minimum)
 - 1x 3D Printed Cover
-- 1x layer1 Vinyl Skin
-- 1x layer2 Vinyl Skin
-- 1x cover Vinyl Skin
+- 1x layer1 Vinyl Skin [width is ~169mm (scale the skin proportionally)]
+- 1x layer2 Vinyl Skin [width is ~169mm (scale the skin proportionally)]
+- 1x cover Vinyl Skin [width is ~165mm (scale the skin proportionally)]
 - 7x Gateron Red Keyswitches
 - 2x Bourns PEC16-2015F-N0024 Encoders
 - 1x 1x1 G20 Keycap
@@ -132,3 +132,4 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Increase spacing between BTN and FX
 - Actually make a cover vinyl that fits right
 - M3 Nut hole on cover
+- Tweak vinyl skin aesthetic button size cutouts
