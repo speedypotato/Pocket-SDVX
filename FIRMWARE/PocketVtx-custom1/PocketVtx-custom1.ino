@@ -113,11 +113,11 @@ void keyboard_mode() {
     // if there's a difference in encoder movement from last pass, move the mouse
     if(knob1 < old_knob1)
     {
-      Mouse.move(-15, 0);
+      Mouse.move(-5, 0);
     }
     else
     {
-      Mouse.move(15, 0);
+      Mouse.move(5, 0);
     }
     
   // we count the difference in the encoders, but we must not go over arduino's int limit
@@ -141,11 +141,11 @@ void keyboard_mode() {
   {
     if(knob2 > old_knob2)
     {
-      Mouse.move(0, 15);
+      Mouse.move(0, 5);
     }
     else
     {
-      Mouse.move(0, -15);
+      Mouse.move(0, -5);
     }
     
     if(knob2 < -255)

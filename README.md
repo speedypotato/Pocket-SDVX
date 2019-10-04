@@ -131,4 +131,3 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Actually make a cover vinyl that fits right
 - M3 Nut hole on cover
 - Tweak vinyl skin aesthetic button size cutouts
-- Reduce default sensitivity of knobs in firmware
