@@ -127,8 +127,11 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - https://github.com/mon/PocketVoltex
 
 ## Possible To-Do List
-- LED lights
 - Increase spacing between BTN and FX
 - Actually make a cover vinyl that fits right
 - M3 Nut hole on cover
 - Tweak vinyl skin aesthetic button size cutouts
+- Consider new way to secure back panel
+
+## Finished Items from the To-Do List
+- LED lights [See YouTube guide]
