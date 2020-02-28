@@ -37,8 +37,8 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
   - Arduino Pro Micro Pinout
     - VOL-L A 2
     - VOL-L B 3
-    - VOL_R A RX1
-    - VOL_R B TX0
+    - VOL_R A RXI
+    - VOL_R B TXO
     - BT_ST   4
     - BT_A    5
     - BT_B    6
