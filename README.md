@@ -24,7 +24,7 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 
 ## General Assembly Instructions
 - 3D print case and cover
-- Cut vinyls: layer1, layer2, cover
+- Cut vinyls: layer1, layer2, cover_v2
 - Weed vinyls(remove excess).
 - Clean face with rubbing/isopropyl alcohol and apply skin using transfer tape.  Apply layer1, then layer2.  Then apply cover.
   - Note: Shine a flashlight on the case's corner to more easily see where to line up the skin.  I make my skins every so slightly smaller than the actual face for more leeway.  The skin's width is ~169mm (scale the skin proportionally).
@@ -128,10 +128,15 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 
 ## Possible To-Do List
 - Increase spacing between BTN and FX
-- Actually make a cover vinyl that fits right
 - M3 Nut hole on cover
 - Tweak vinyl skin aesthetic button size cutouts
 - Consider new way to secure back panel
 
 ## Finished Items from the To-Do List
 - LED lights [See YouTube guide]
+- Actually make a cover vinyl that fits right [use cover_v2.png]
+
+## More Pictures
+![Pocket SDVX 13](IMAGES/7.jpg)
+
+![Pocket SDVX 11 and 13](IMAGES/8.jpg)
