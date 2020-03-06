@@ -5,42 +5,44 @@ iivxReport_t report;
 #include "Mouse.h"
 #include <EEPROM.h>
 
-#define REPORT_DELAY 2000
 // Number of microseconds between HID reports
 // 2000 = 500hz
+#define REPORT_DELAY 2000
 
-// Options, change only these values
-int old_macroButtonState = HIGH;
-int old_startButtonState = HIGH;
-int old_btnMash = 0;
-int old_Button1State = HIGH;
-int old_Button2State = HIGH;
 int currMode = EEPROM.read(0); // Read eeprom address 0. Value stored indicated mode. Mode1=joystick, Mode2=keyboard.
 uint8_t buttonCount = 7;
-uint8_t macropin = 16;
 
-#define BT_A 5
-#define BT_B 6
-#define BT_C 7
-#define BT_D 8
-#define FX_L 9
-#define FX_R 10
+// Button Keybinds
+#define BIND_ST   KEY_RETURN
+#define BIND_A    'a'
+#define BIND_B    's'
+#define BIND_C    'd'
+#define BIND_D    'f'
+#define BIND_FX_L 'z'
+#define BIND_FX_R 'x'
+
+// Button Pinout
 #define BT_ST 4
+#define BT_A  5
+#define BT_B  6
+#define BT_C  7
+#define BT_D  8
+#define FX_L  9
+#define FX_R  10
 
-uint8_t lightMode = 0;
 // 0 = reactive lighting, 1 = HID lighting
+uint8_t lightMode = 0;
+
 uint8_t buttonPins[] = { 4, 5, 6, 7, 8, 9, 10};
 uint8_t ledPins[] = {15, 15, 15, 15, 15, 15, 15, 15, 15};
 
-
-#define ENCODER_SENSITIVITY (double) 0.375
 // encoder sensitivity = number of positions per rotation times 4 (24*4) / number of positions for HID report (256)
+#define ENCODER_SENSITIVITY (double) 0.375
 Encoder encL(3, 2), encR(1, 0);
 float knob1 = 0;
 float knob2 = 0;
 float old_knob1 = 0;
 float old_knob2 = 0;
-
 
 void lights(uint8_t lightDesc) {
   for (int i = 0; i < buttonCount; i++) {
@@ -53,36 +55,25 @@ void lights(uint8_t lightDesc) {
 }
 
 void setup() {
-//Serial.begin(9600);
- //while (!Serial) ;
-
-  
   delay(1000);
+  
   // Setup I/O for pins
   for (int i = 0; i < buttonCount; i++) {
     pinMode(buttonPins[i], INPUT_PULLUP);
     pinMode(ledPins[i], OUTPUT);
   }
-    pinMode(macropin, INPUT_PULLUP);
-  //  pinMode(sysPin,INPUT_PULLUP);
-  //setup interrupts
-
 
   // startup mode
   int Button1State = digitalRead(5); //Read Btn-A
   int Button2State = digitalRead(6); //Read Btn-B
-    // button 1 is held down
+    // button 1 is held down: Joystick Mode
     if (Button1State == LOW && Button2State == HIGH) {
-      // do things
       if (currMode != 1) { //if eeprom=2
-      //  Serial.print("Switching to mode 1");
         EEPROM.update(0, 1); 
         delay(200);
       }
-    }
-
-    if (Button2State == LOW && Button1State == HIGH) {
-      //if button 2 is held down
+    } else if (Button2State == LOW && Button1State == HIGH) {
+      // button 2 is held down: Keyboard Mode
       if (currMode != 2) { //if eeprom=1
         EEPROM.update(0, 2);
         delay(200);
@@ -90,150 +81,98 @@ void setup() {
     }
 }
 
-
 void loop() {
-
-
   if (EEPROM.read(0) == 1) {
     joy_mode();
-  }
-  if (EEPROM.read(0) == 2) {
+  } else if (EEPROM.read(0) == 2) {
     keyboard_mode();
   }
 }
 
 void keyboard_mode() {
-  
   // read encoders
   knob1 =  (float)(encL.read());
   knob2 = (float)encR.read();
-  
-  if(knob1 != old_knob1)
-  {
+
+  if(knob1 != old_knob1) {
     // if there's a difference in encoder movement from last pass, move the mouse
-    if(knob1 < old_knob1)
-    {
+    if(knob1 < old_knob1) {
       Mouse.move(-5, 0);
-    }
-    else
-    {
+    } else {
       Mouse.move(5, 0);
     }
     
-  // we count the difference in the encoders, but we must not go over arduino's int limit
-    if(knob1 < -255)
-    {
+    // we count the difference in the encoders, but we must not go over arduino's int limit
+    if(knob1 < -255) {
       encL.write(0);
       old_knob1 = 0;
-    }
-    else if (knob1 > 255)
-    {
+    } else if (knob1 > 255) {
       encL.write(0);
       old_knob1 = 0;
-    }
-    else
-    {
+    } else {
       old_knob1 = knob1;
     }
   }
   
-  if(knob2 != old_knob2)
-  {
-    if(knob2 > old_knob2)
-    {
+  if(knob2 != old_knob2) {
+    if(knob2 > old_knob2) {
       Mouse.move(0, 5);
-    }
-    else
-    {
+    } else {
       Mouse.move(0, -5);
     }
     
-    if(knob2 < -255)
-    {
+    if(knob2 < -255) {
       encR.write(0);
       old_knob2 = 0;
-    }
-    else if(knob2 > 255)
-    {
+    } else if(knob2 > 255) {
       encR.write(0);
       old_knob2 = 0;
-    }
-    else
-    {
+    } else {
       old_knob2 = knob2;
     }
   }
   
   // read the buttons for low, if it's low, output a keyboard press  
-  if(digitalRead(BT_A) == LOW)
-  {
-    Keyboard.press('a');
-  }
-  else
-  {
-    Keyboard.release('a');
+  if(digitalRead(BT_A) == LOW) {
+    Keyboard.press(BIND_A);
+  } else {
+    Keyboard.release(BIND_A);
   }
   
-  if(digitalRead(BT_B) == LOW)
-  {
-    Keyboard.press('s');
-  }
-  else
-  {
-    Keyboard.release('s');
+  if(digitalRead(BT_B) == LOW) {
+    Keyboard.press(BIND_B);
+  } else {
+    Keyboard.release(BIND_B);
   }
   
-  if(digitalRead(BT_C) == LOW)
-  {
-    Keyboard.press('d');
-  }
-  else
-  {
-    Keyboard.release('d');
+  if(digitalRead(BT_C) == LOW) {
+    Keyboard.press(BIND_C);
+  } else {
+    Keyboard.release(BIND_C);
   }
   
-  if(digitalRead(BT_D) == LOW)
-  {
-    Keyboard.press('f');
-  }
-  else
-  {
-    Keyboard.release('f');
+  if(digitalRead(BT_D) == LOW) {
+    Keyboard.press(BIND_D);
+  } else {
+    Keyboard.release(BIND_D);
   }
   
-  if(digitalRead(FX_L) == LOW)
-  {
-    Keyboard.press('z');
-  }
-  else
-  {
-    Keyboard.release('z');
+  if(digitalRead(FX_L) == LOW) {
+    Keyboard.press(BIND_FX_L);
+  } else {
+    Keyboard.release(BIND_FX_L);
   }
   
-  if(digitalRead(FX_R) == LOW)
-  {
-    Keyboard.press('x');
-  }
-  else
-  {
-    Keyboard.release('x');
+  if(digitalRead(FX_R) == LOW) {
+    Keyboard.press(BIND_FX_R);
+  } else {
+    Keyboard.release(BIND_FX_R);
   }
   
-  if(digitalRead(BT_ST) == LOW)
-  {
-    Keyboard.press(KEY_RETURN);
-  }
-  else
-  {
-    Keyboard.release(KEY_RETURN);
-  }
-  if(digitalRead(macropin) == LOW)
-  {
-    Keyboard.press(KEY_ESC);
-  }
-  else
-  {
-    Keyboard.release(KEY_ESC);
+  if(digitalRead(BT_ST) == LOW) {
+    Keyboard.press(BIND_ST);
+  } else {
+    Keyboard.release(BIND_ST);
   }
 }
 
@@ -291,149 +230,7 @@ void joy_mode() {
   234 NumPad 0 and Insert
   235 NumPad . and Delete
   */
-
-int macroButtonState = digitalRead(macropin);
-int startButtonState = digitalRead(4);
-int Button1State = digitalRead(5);
-int Button2State = digitalRead(6);
-
-// Press Start + Macro to send numpad_6
-if (macroButtonState != old_macroButtonState) { //compare the button states (from StateChangeDetection Example)
-  if (digitalRead(macropin) == LOW) { //if macro button is pressed
-      if (digitalRead(4) == LOW){ // if start button is pressed
-      Keyboard.begin();
-      Keyboard.press(54); //top row 6
-      delay(30);
-      Keyboard.release(54);
-      Keyboard.end();
-       } else {
-        Keyboard.end();
-       } 
-    }
-  }
-
-//Commented out some shortcuts, can't tell if causing input lag or not... maybe it's just my terrible sdvx skills
-/*  // Press Start + Btn1 to send Numpad 9
-if (Button1State != old_Button1State) { //compare the button states (from StateChangeDetection Example)
-  if (digitalRead(5) == LOW) { //if Btn1 is pressed
-      if (digitalRead(4) == LOW){ // if start button is pressed
-      Keyboard.begin();
-      Keyboard.press(233); //numpad_9
-      delay(30);
-      Keyboard.release(233);
-      Keyboard.end();
-       } else {
-        Keyboard.end();
-       } 
-    }
-  }
-
-    // Press Start + Btn2 to send Numpad 3
-if (Button2State != old_Button2State) { //compare the button states (from StateChangeDetection Example)
-  if (digitalRead(6) == LOW) { //if Btn6 is pressed
-      if (digitalRead(4) == LOW){ // if start button is pressed
-      Keyboard.begin();
-      Keyboard.press(227); //numpad_3
-      delay(30);
-      Keyboard.release(227);
-      Keyboard.end();
-       } else {
-        Keyboard.end();
-       } 
-    }
-  }
-*/
-// ****************Change your PIN here using the ascii table above**************************
-
-if (digitalRead(4) == HIGH) {
- if (macroButtonState != old_macroButtonState) {  //compare the button states (from StateChangeDetection Example)
-   if (digitalRead(macropin) == LOW) {  //if macro button is pressed
-   Keyboard.begin();
-   Keyboard.press(8); //backspace (triggers card scan)
-   delay(300);
-   Keyboard.release(8);
-   delay(30);
-   Keyboard.press(49);//toprow 1
-   delay(30);
-   Keyboard.release(49);
-   delay(30);
-   Keyboard.press(50); //toprow 2
-   delay(30);
-   Keyboard.release(50);
-   delay(30);
-   Keyboard.press(51); //toprow 3
-   delay(30);
-   Keyboard.release(51);
-   delay(30);
-   Keyboard.press(52); //toprow 4
-   delay(30);
-   Keyboard.release(52);
-   Keyboard.end();// end keyboard
-   } else {
-  Keyboard.end();
-      }
-  }
-}
-
-//Press button 1-7 at the same time to send Numpad_Divide, which can be mapped to the Test button. 
-int btnMash=0;
-
- if (digitalRead(4) == LOW) {
- btnMash = btnMash + 1;
- }
- if (digitalRead(5) == LOW) {
- btnMash = btnMash + 1;
- }
- if (digitalRead(6) == LOW) {
- btnMash = btnMash + 1;
- }
- if (digitalRead(7) == LOW) {
- btnMash = btnMash + 1;
- }
- if (digitalRead(8) == LOW) {
- btnMash = btnMash + 1;
- }
- if (digitalRead(9) == LOW) {
- btnMash = btnMash + 1;
- }
- if (digitalRead(10) == LOW) {
- btnMash = btnMash + 1;
- }
-if (btnMash != old_btnMash) {
- if (btnMash == 7) {
-  Keyboard.begin();
-  Keyboard.press(61); //Top row equals
-  delay(40);
-  Keyboard.release(61);
-  Keyboard.end();
- } else {
-  Keyboard.end();
- }
-}
-
-
-old_macroButtonState = macroButtonState; // save the current state as the last state, for next time through the loop
-old_startButtonState = startButtonState; // save the current state as the last state, for next time through the loop
-old_btnMash = btnMash;
-old_Button1State = Button1State;
-old_Button2State = Button2State;
-
-    
   
-    
-  // Detect lighting changes
-  // if(digitalRead(sysPin)!=HIGH){
-  //   if(report.buttons == 1){
-  //     lightMode = 0;
-  //  } else if (report.buttons == 4){
-  //    lightMode = 1;
-  //  } else if (report.buttons == 16){
-  //    report.buttons = (uint16_t)1 << (buttonCount);
-  //   } else if (report.buttons == 64){
-  //     report.buttons = (uint16_t)1 << (buttonCount+1);
-  //   }
-  //  }
-  // Send report and delay
   iivx.setState(&report);
   delayMicroseconds(REPORT_DELAY);
 }
