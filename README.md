@@ -28,7 +28,7 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Weed vinyls(remove excess).
 - Clean face with rubbing/isopropyl alcohol and apply skin using transfer tape.  Apply layer1, then layer2.  Then apply cover.
   - Note: Shine a flashlight on the case's corner to more easily see where to line up the skin.  I make my skins every so slightly smaller than the actual face for more leeway.  The skin's width is ~169mm (scale the skin proportionally).
-  - Note 2: I have lazily taken cover and scaled it down.  Thus, the spacing around the edge is probably a bit uneven.  Apply to the best of your ability.  The skin's width is ~165mm (scale the skin proportionally).
+  - Note 2: Apply to the best of your ability, with even spacing along all sides.  The skin's width is ~165mm (scale the skin proportionally).
 - Insert Gateron switches and secure each corner of the switch with hot glue on the inside.  See video Part 1 for details.
 - Using a soldering iron, tin all contacts on the Gateron switches.
 - Wire up all the common/ground for the switches and the encoders.  See video Part 2 for details.
@@ -70,9 +70,9 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - 1x 1x1 G20 Keycap
 - 4x 1x1.25 G20 Keycap
 - 2x 1x2 G20 Keycap
-- 2x 20mm Diameter Solid Aluminum Knobs (20mm high used, 22mm height should work as well)
+- 2x 20mm Diameter Solid Aluminum Knobs (20mm high used, 17-22mm height should work as well)
 - 1x Arduino Pro Micro
-- 6x Rubber Feet (0.8-1mm in diameter)
+- 6x Rubber Feet (0.8-1cm in diameter)
 - 1x Micro USB Male to USB C Female (27cm length)
 - 1x M3x5 Screw
 - Cat5e Cable (~2 feet, strip it open and take a twist of wire)
@@ -105,6 +105,7 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - USB C cable (WARNING: CONTAINS 10): https://www.aliexpress.com/item/33032210292.html
 
 ## Miscellaneous Info
+- I recommend printing the case in a solid dark color so that the pro micro LED doesn't shine through.  Then print the cover in a transparent/white color so that the pro micro LED shines through on the bottom, acting as a neat little power LED.
 - If the rubber feet aren't doing their job, they're probably dusty.  Wipe them down with a little bit of rubbing alcohol.
 - Encoders have an initial break-in period.  If they are stiff, rotate them for a few minutes to break them in.
 - This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
@@ -127,8 +128,9 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - https://github.com/mon/PocketVoltex
 
 ## Possible To-Do List
-- Increase spacing between BTN and FX
+- HID LEDs
 - M3 Nut hole on cover
+- Increase spacing between BTN and FX
 - Tweak vinyl skin aesthetic button size cutouts
 - Consider new way to secure back panel
 
