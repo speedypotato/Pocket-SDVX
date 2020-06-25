@@ -1,7 +1,7 @@
 # Pocket-SDVX
 A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Based off of mon's Pocket Voltex and Cammy's pocketvtx!
 
-![Pocket SDVX](IMAGES/1.jpg)
+![Pocket SDVX 14](IMAGES/10.jpg)
 
 ![Pocket SDVX](IMAGES/5.jpg)
 
@@ -34,6 +34,7 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Wire up all the common/ground for the switches and the encoders.  See video Part 2 for details.
 - Wire up all the switches and encoders with their own individual wire.
 - Solder all the wires to the board.  See video Part 3 for details.
+  ![Pocket SDVX Wiring Diagram](IMAGES/9.jpg)
   - Arduino Pro Micro Pinout
     - VOL-L A 2
     - VOL-L B 3
@@ -58,6 +59,8 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Mount keycaps.  See video Part 8 for details.
 - Mount knobs.  Use the arduino pin headers as a spacer on each side so the knobs are the same height and don't rub on the encoder nub.
 ### Done.  Enjoy!!
+
+![Pocket SDVX](IMAGES/1.jpg)
 
 ## Parts Required:
 - 1x 3D Printed Case (1.2mm walls, top, bottom layers; 20-25% infill minimum)
@@ -105,6 +108,7 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - USB C cable (WARNING: CONTAINS 10): https://www.aliexpress.com/item/33032210292.html
 
 ## Miscellaneous Info
+- The fancy looking knobs I used for Pocket SDVX #14: https://www.amazon.com/gp/product/B07PQ5H6MF/
 - I recommend printing the case in a solid dark color so that the pro micro LED doesn't shine through.  Then print the cover in a transparent/white color so that the pro micro LED shines through on the bottom, acting as a neat little power LED.
 - If the rubber feet aren't doing their job, they're probably dusty.  Wipe them down with a little bit of rubbing alcohol.
 - Encoders have an initial break-in period.  If they are stiff, rotate them for a few minutes to break them in.
