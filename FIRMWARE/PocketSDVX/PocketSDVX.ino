@@ -7,10 +7,12 @@ iivxReport_t report;
 
 // Number of microseconds between HID reports
 // 2000 = 500hz
-#define REPORT_DELAY 2000
+#define REPORT_DELAY 1000
 
 int currMode = EEPROM.read(0); // Read eeprom address 0. Value stored indicated mode. Mode1=joystick, Mode2=keyboard.
-uint8_t buttonCount = 7;
+
+// Mouse Sens Multiplier
+#define MOUSE_MULT  3
 
 // Button Keybinds
 #define BIND_ST   KEY_RETURN
@@ -29,12 +31,13 @@ uint8_t buttonCount = 7;
 #define BT_D  8
 #define FX_L  9
 #define FX_R  10
+uint8_t buttonCount = 7;
 
-// 0 = reactive lighting, 1 = HID lighting
+uint8_t buttonPins[] = { BT_ST, BT_A, BT_B, BT_C, BT_D, FX_L, FX_R};
+uint8_t ledPins[] = {14, 15, 16, 18, 19, 20, 21};
+
+// 0 = reactive lighting, 1 = HID lighting  NOTE: Currently not implemented
 uint8_t lightMode = 0;
-
-uint8_t buttonPins[] = { 4, 5, 6, 7, 8, 9, 10};
-uint8_t ledPins[] = {15, 15, 15, 15, 15, 15, 15, 15, 15};
 
 // encoder sensitivity = number of positions per rotation times 4 (24*4) / number of positions for HID report (256)
 #define ENCODER_SENSITIVITY (double) 0.375
@@ -95,18 +98,10 @@ void keyboard_mode() {
   knob2 = (float)encR.read();
 
   if(knob1 != old_knob1) {
-    // if there's a difference in encoder movement from last pass, move the mouse
-    if(knob1 < old_knob1) {
-      Mouse.move(-5, 0);
-    } else {
-      Mouse.move(5, 0);
-    }
+    Mouse.move((knob1 - old_knob1) * MOUSE_MULT, 0);
     
     // we count the difference in the encoders, but we must not go over arduino's int limit
-    if(knob1 < -255) {
-      encL.write(0);
-      old_knob1 = 0;
-    } else if (knob1 > 255) {
+    if(knob1 < -255 || knob1 > 255) {
       encL.write(0);
       old_knob1 = 0;
     } else {
@@ -115,16 +110,9 @@ void keyboard_mode() {
   }
   
   if(knob2 != old_knob2) {
-    if(knob2 > old_knob2) {
-      Mouse.move(0, 5);
-    } else {
-      Mouse.move(0, -5);
-    }
+    Mouse.move(0, (knob2 - old_knob2) * MOUSE_MULT);
     
-    if(knob2 < -255) {
-      encR.write(0);
-      old_knob2 = 0;
-    } else if(knob2 > 255) {
+    if(knob2 < -255 || knob2 > 255) {
       encR.write(0);
       old_knob2 = 0;
     } else {
