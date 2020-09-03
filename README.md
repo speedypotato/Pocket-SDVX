@@ -139,6 +139,7 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - 20mm knobs can be picked up for much cheaper if you opt for ones that are not all aluminum.
 - Can't get Bourns encoders?  Sorry, I have yet to find a good alternative.
 - Vinyl skin alternative?  Print out layer2.png on paper, cut it out, and glue it on.  Can also try laminating with packing tape for more durability.
+- Cherry MX O-Ring Dampers can be used for a quieter and softer bottom-out.  I had to put 2 on FX-L and FX-R each for dampening to work.  The rest of the keycaps have 1 O-Ring.
 
 ## Miscellaneous Info
 - The fancy looking knobs I used for Pocket SDVX #14: https://www.amazon.com/gp/product/B07PQ5H6MF/
