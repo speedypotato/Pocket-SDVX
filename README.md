@@ -52,6 +52,7 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Temperature Controlled Soldering Iron
 - Hot Glue Gun
 - Needle Nose Pliers
+- Wire Cutter/Stripper
 - Phillips Screwdriver (if you use a phillips head M3 screw)
 - Allen Key (for knobs' grubscrew, M3 screw if you have a hex head)
 - Rubbing/Isopropyl Alcohol
