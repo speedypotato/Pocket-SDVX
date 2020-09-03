@@ -22,6 +22,8 @@
 
 volatile uint16_t iivx_led = 0;
 
+unsigned long extern reactiveTimeoutCount;
+
 HID_& HID()
 {
 	static HID_ obj;
@@ -140,6 +142,7 @@ bool HID_::setup(USBSetup& setup)
 				if (3 == USB_RecvControl(data, 3)){
 					iivx_led = (uint16_t) (data[2] << 8) + data[1];
 					//iivx_led = data[1];
+         reactiveTimeoutCount = 0;
 				}
 				return true;
 			}

@@ -33,11 +33,21 @@ int currMode = EEPROM.read(0); // Read eeprom address 0. Value stored indicated 
 #define FX_R  10
 uint8_t buttonCount = 7;
 
-uint8_t buttonPins[] = { BT_ST, BT_A, BT_B, BT_C, BT_D, FX_L, FX_R};
-uint8_t ledPins[] = {14, 15, 16, 18, 19, 20, 21};
+// LED Pinout
+#define BT_ST_LED 16
+#define BT_A_LED  14
+#define BT_B_LED  15
+#define BT_C_LED  18
+#define BT_D_LED  19
+#define FX_L_LED  20
+#define FX_R_LED  21
 
-// 0 = reactive lighting, 1 = HID lighting  NOTE: Currently not implemented
-uint8_t lightMode = 0;
+//number of cycles before HID falls back to reactive
+unsigned long reactiveTimeoutMax = 1000;
+unsigned long reactiveTimeoutCount = reactiveTimeoutMax;
+
+uint8_t buttonPins[] = { BT_ST, BT_A, BT_B, BT_C, BT_D, FX_L, FX_R};
+uint8_t ledPins[] = { BT_ST_LED, BT_A_LED, BT_B_LED, BT_C_LED, BT_D_LED, FX_L_LED, FX_R_LED};
 
 // encoder sensitivity = number of positions per rotation times 4 (24*4) / number of positions for HID report (256)
 #define ENCODER_SENSITIVITY (double) 0.375
@@ -67,8 +77,8 @@ void setup() {
   }
 
   // startup mode
-  int Button1State = digitalRead(5); //Read Btn-A
-  int Button2State = digitalRead(6); //Read Btn-B
+  int Button1State = digitalRead(BT_A); //Read Btn-A
+  int Button2State = digitalRead(BT_B); //Read Btn-B
     // button 1 is held down: Joystick Mode
     if (Button1State == LOW && Button2State == HIGH) {
       if (currMode != 1) { //if eeprom=2
@@ -123,44 +133,58 @@ void keyboard_mode() {
   // read the buttons for low, if it's low, output a keyboard press  
   if(digitalRead(BT_A) == LOW) {
     Keyboard.press(BIND_A);
+    digitalWrite(BT_A_LED, HIGH);
   } else {
     Keyboard.release(BIND_A);
+    digitalWrite(BT_A_LED, LOW);
   }
   
   if(digitalRead(BT_B) == LOW) {
     Keyboard.press(BIND_B);
+    digitalWrite(BT_B_LED, HIGH);
   } else {
     Keyboard.release(BIND_B);
+    digitalWrite(BT_B_LED, LOW);
   }
   
   if(digitalRead(BT_C) == LOW) {
     Keyboard.press(BIND_C);
+    digitalWrite(BT_C_LED, HIGH);
   } else {
     Keyboard.release(BIND_C);
+    digitalWrite(BT_C_LED, LOW);
   }
   
   if(digitalRead(BT_D) == LOW) {
     Keyboard.press(BIND_D);
+    digitalWrite(BT_D_LED, HIGH);
   } else {
     Keyboard.release(BIND_D);
+    digitalWrite(BT_D_LED, LOW);
   }
   
   if(digitalRead(FX_L) == LOW) {
     Keyboard.press(BIND_FX_L);
+    digitalWrite(FX_L_LED, HIGH);
   } else {
     Keyboard.release(BIND_FX_L);
+    digitalWrite(FX_L_LED, LOW);
   }
   
   if(digitalRead(FX_R) == LOW) {
     Keyboard.press(BIND_FX_R);
+    digitalWrite(FX_R_LED, HIGH);
   } else {
     Keyboard.release(BIND_FX_R);
+    digitalWrite(FX_R_LED, LOW);
   }
   
   if(digitalRead(BT_ST) == LOW) {
     Keyboard.press(BIND_ST);
+    digitalWrite(BT_ST_LED, HIGH);
   } else {
     Keyboard.release(BIND_ST);
+    digitalWrite(BT_ST_LED, LOW);
   }
 }
 
@@ -173,13 +197,16 @@ void joy_mode() {
       report.buttons &= ~((uint16_t)1 << i);
     }
   }
+  
   // Read Encoders
   report.xAxis = (uint8_t)((int32_t)(encL.read() / ENCODER_SENSITIVITY) % 256);
   report.yAxis = (uint8_t)((int32_t)(encR.read() / ENCODER_SENSITIVITY) % 256);
+  
   // Light LEDs
-  if (lightMode == 0) {
+  if (reactiveTimeoutCount >= reactiveTimeoutMax) {
     lights(report.buttons);
   } else {
+    reactiveTimeoutCount++;
     lights(iivx_led);
   }
 
