@@ -34,7 +34,7 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - 1x 1x1 G20 Keycap
 - 4x 1x1.25 G20 Keycap
 - 2x 1x2 G20 Keycap
-- 2x 20mm Diameter Solid Aluminum Knobs (20mm high used, 17-22mm height should work as well)
+- 2x 20mm Diameter Solid Aluminum Knobs (17-22mm height, 6mm inner diameter hole)
 - 1x Arduino Pro Micro
 - 6x Rubber Feet (0.8-1cm in diameter)
 - 1x Micro USB Male to USB C Female (27cm length)
@@ -126,13 +126,19 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - Arduino Pro Micro (WARNING: CONTAINS 10): https://www.aliexpress.com/item/4000045084392.html
 - Rubber Feet: https://www.ebay.com/itm/50PCS-Rubber-Feet-Clear-Semicircle-Bumpers-Door-Silicone-Buffer-Pad-Furniture/152925672374
 - Micro USB Male to USB C Female: https://www.aliexpress.com/item/32983342667.html
-- M3x5 Screw: https://www.ebay.com/itm/20X-M3-3-80mm-Round-Pan-Head-Phillips-Screws-304-Stainless-Steel-Machine-Screws/302237442873?
-- USB C cable (WARNING: CONTAINS 10): https://www.aliexpress.com/item/33032210292.
+- M3x5 Screw: https://www.ebay.com/itm/20X-M3-3-80mm-Round-Pan-Head-Phillips-Screws-304-Stainless-Steel-Machine-Screws/302237442873
+- USB C cable (WARNING: CONTAINS 10): https://www.aliexpress.com/item/33032210292.html
 
 ## Links I used for LEDs
 NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looking for!
 - 2x3x4mm LEDs: https://www.aliexpress.com/item/4000463652201.html
 - 100Ohm Resistors: https://www.ebay.com/itm/100PCS-1-4W-0-25W-Metal-Film-Resistor-1-Full-Range-of-Values-0%CE%A9-to-10M%CE%A9/252838503547
+
+## Alternate Parts to Consider
+- DSA profile keycaps might be a good alternative to G20 if G20 is too expensive or hard to get.
+- 20mm knobs can be picked up for much cheaper if you opt for ones that are not all aluminum.
+- Can't get Bourns encoders?  Sorry, I have yet to find a good alternative.
+- Vinyl skin alternative?  Print out layer2.png on paper, cut it out, and glue it on.  Can also try laminating with packing tape for more durability.
 
 ## Miscellaneous Info
 - The fancy looking knobs I used for Pocket SDVX #14: https://www.amazon.com/gp/product/B07PQ5H6MF/
