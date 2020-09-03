@@ -9,7 +9,8 @@ iivxReport_t report;
 // 2000 = 500hz
 #define REPORT_DELAY 1000
 
-int currMode = EEPROM.read(0); // Read eeprom address 0. Value stored indicated mode. Mode1=joystick, Mode2=keyboard.
+// Read eeprom address 0. Value stored indicated mode. Mode1=joystick, Mode2=keyboard.
+int currMode = EEPROM.read(0);
 
 // Mouse Sens Multiplier
 #define MOUSE_MULT  3
@@ -42,14 +43,14 @@ uint8_t buttonCount = 7;
 #define FX_L_LED  20
 #define FX_R_LED  21
 
-//number of cycles before HID falls back to reactive
+// Number of cycles before HID falls back to reactive
 unsigned long reactiveTimeoutMax = 1000;
 unsigned long reactiveTimeoutCount = reactiveTimeoutMax;
 
-uint8_t buttonPins[] = { BT_ST, BT_A, BT_B, BT_C, BT_D, FX_L, FX_R};
-uint8_t ledPins[] = { BT_ST_LED, BT_A_LED, BT_B_LED, BT_C_LED, BT_D_LED, FX_L_LED, FX_R_LED};
+uint8_t buttonPins[] = { BT_ST, BT_A, BT_B, BT_C, BT_D, FX_L, FX_R };
+uint8_t ledPins[] = { BT_ST_LED, BT_A_LED, BT_B_LED, BT_C_LED, BT_D_LED, FX_L_LED, FX_R_LED };
 
-// encoder sensitivity = number of positions per rotation times 4 (24*4) / number of positions for HID report (256)
+// Encoder sensitivity = number of positions per rotation times 4 (24*4) / number of positions for HID report (256)
 #define ENCODER_SENSITIVITY (double) 0.375
 Encoder encL(3, 2), encR(1, 0);
 float knob1 = 0;
@@ -68,7 +69,7 @@ void lights(uint8_t lightDesc) {
 }
 
 void setup() {
-  delay(1000);
+  delay(500);
   
   // Setup I/O for pins
   for (int i = 0; i < buttonCount; i++) {
@@ -76,18 +77,18 @@ void setup() {
     pinMode(ledPins[i], OUTPUT);
   }
 
-  // startup mode
+  // Startup mode
   int Button1State = digitalRead(BT_A); //Read Btn-A
   int Button2State = digitalRead(BT_B); //Read Btn-B
-    // button 1 is held down: Joystick Mode
+    // Button 1 is held down: Joystick Mode
     if (Button1State == LOW && Button2State == HIGH) {
-      if (currMode != 1) { //if eeprom=2
+      if (currMode != 1) {
         EEPROM.update(0, 1); 
         delay(200);
       }
     } else if (Button2State == LOW && Button1State == HIGH) {
-      // button 2 is held down: Keyboard Mode
-      if (currMode != 2) { //if eeprom=1
+      // Button 2 is held down: Keyboard Mode
+      if (currMode != 2) {
         EEPROM.update(0, 2);
         delay(200);
       }
@@ -103,14 +104,14 @@ void loop() {
 }
 
 void keyboard_mode() {
-  // read encoders
+  // Read encoders
   knob1 =  (float)(encL.read());
   knob2 = (float)encR.read();
 
   if(knob1 != old_knob1) {
     Mouse.move((knob1 - old_knob1) * MOUSE_MULT, 0);
     
-    // we count the difference in the encoders, but we must not go over arduino's int limit
+    // We count the difference in the encoders, but we must not go over arduino's int limit
     if(knob1 < -255 || knob1 > 255) {
       encL.write(0);
       old_knob1 = 0;
@@ -130,7 +131,7 @@ void keyboard_mode() {
     }
   }
   
-  // read the buttons for low, if it's low, output a keyboard press  
+  // Read the buttons for low, if it's low, output a keyboard press  
   if(digitalRead(BT_A) == LOW) {
     Keyboard.press(BIND_A);
     digitalWrite(BT_A_LED, HIGH);
