@@ -137,10 +137,10 @@ bool HID_::setup(USBSetup& setup)
 		}
 		if (request == HID_SET_REPORT)
 		{
-			if(setup.wLength == 3){
-				uint8_t data[3];
-				if (3 == USB_RecvControl(data, 3)){
-          iivx_led = (uint16_t) (data[2] << 8) + data[1];
+			if(setup.wLength == 2){
+				uint8_t data[2];
+				if (2 == USB_RecvControl(data, 2)){
+          iivx_led = (uint16_t)data[1];
           reactiveTimeoutCount = 0;
 				}
 				return true;

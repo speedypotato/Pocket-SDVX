@@ -46,6 +46,7 @@ int currMode = EEPROM.read(0);
 unsigned long reactiveTimeoutMax = 1000;
 unsigned long reactiveTimeoutCount = reactiveTimeoutMax;
 
+uint8_t bindKeys[] = { BIND_A, BIND_B, BIND_C, BIND_D, BIND_FX_L, BIND_FX_R, BIND_ST };
 uint8_t buttonPins[] = { BT_A, BT_B, BT_C, BT_D, FX_L, FX_R, BT_ST };
 uint8_t ledPins[] = { BT_A_LED, BT_B_LED, BT_C_LED, BT_D_LED, FX_L_LED, FX_R_LED, BT_ST_LED };
 uint8_t buttonCount = sizeof(buttonPins) / sizeof(buttonPins[0]);
@@ -58,6 +59,10 @@ float knob2 = 0;
 float old_knob1 = 0;
 float old_knob2 = 0;
 
+/**
+ * Light Logic for Controller & HID Mode
+ * @param lightDesc Bit representation of activated lights
+ */
 void lights(uint16_t lightDesc) {
   for (int i = 0; i < buttonCount - 1; i++) {
     if ((lightDesc >> i) & 1) {
@@ -66,13 +71,17 @@ void lights(uint16_t lightDesc) {
       digitalWrite(ledPins[i], LOW);
     }
   }
-  if ((lightDesc >> 8) & 1) {
+  // Start button light: 8 for controller reactive, 6 for HID
+  if ((lightDesc >> 8) & 1 || (lightDesc >> 6) & 1) {
     digitalWrite(BT_ST_LED, HIGH);
   } else {
     digitalWrite(BT_ST_LED, LOW);
   }
 }
 
+/**
+ * Arduino Setup
+ */
 void setup() {
   // Setup I/O for pins
   for (int i = 0; i < buttonCount; i++) {
@@ -83,21 +92,24 @@ void setup() {
   // Startup mode
   int Button1State = digitalRead(BT_A); //Read Btn-A
   int Button2State = digitalRead(BT_B); //Read Btn-B
-    // Button 1 is held down: Joystick Mode
-    if (Button1State == LOW && Button2State == HIGH) {
-      if (currMode != 1) {
-        EEPROM.update(0, 1); 
-        delay(200);
-      }
-    } else if (Button2State == LOW && Button1State == HIGH) {
-      // Button 2 is held down: Keyboard Mode
-      if (currMode != 2) {
-        EEPROM.update(0, 2);
-        delay(200);
-      }
+  // Button 1 is held down: Joystick Mode
+  if (Button1State == LOW && Button2State == HIGH) {
+    if (currMode != 1) {
+      EEPROM.update(0, 1); 
+      delay(200);
     }
+  } else if (Button2State == LOW && Button1State == HIGH) {
+    // Button 2 is held down: Keyboard Mode
+    if (currMode != 2) {
+      EEPROM.update(0, 2);
+      delay(200);
+    }
+  }
 }
 
+/**
+ * Arduino Loop
+ */
 void loop() {
   if (EEPROM.read(0) == 1) {
     joy_mode();
@@ -106,6 +118,9 @@ void loop() {
   }
 }
 
+/**
+ * Keyboard Implementation
+ */
 void keyboard_mode() {
   // Read encoders
   knob1 =  (float)(encL.read());
@@ -134,64 +149,21 @@ void keyboard_mode() {
     }
   }
   
-  // Read the buttons for low, if it's low, output a keyboard press  
-  if(digitalRead(BT_A) == LOW) {
-    Keyboard.press(BIND_A);
-    digitalWrite(BT_A_LED, HIGH);
-  } else {
-    Keyboard.release(BIND_A);
-    digitalWrite(BT_A_LED, LOW);
-  }
-  
-  if(digitalRead(BT_B) == LOW) {
-    Keyboard.press(BIND_B);
-    digitalWrite(BT_B_LED, HIGH);
-  } else {
-    Keyboard.release(BIND_B);
-    digitalWrite(BT_B_LED, LOW);
-  }
-  
-  if(digitalRead(BT_C) == LOW) {
-    Keyboard.press(BIND_C);
-    digitalWrite(BT_C_LED, HIGH);
-  } else {
-    Keyboard.release(BIND_C);
-    digitalWrite(BT_C_LED, LOW);
-  }
-  
-  if(digitalRead(BT_D) == LOW) {
-    Keyboard.press(BIND_D);
-    digitalWrite(BT_D_LED, HIGH);
-  } else {
-    Keyboard.release(BIND_D);
-    digitalWrite(BT_D_LED, LOW);
-  }
-  
-  if(digitalRead(FX_L) == LOW) {
-    Keyboard.press(BIND_FX_L);
-    digitalWrite(FX_L_LED, HIGH);
-  } else {
-    Keyboard.release(BIND_FX_L);
-    digitalWrite(FX_L_LED, LOW);
-  }
-  
-  if(digitalRead(FX_R) == LOW) {
-    Keyboard.press(BIND_FX_R);
-    digitalWrite(FX_R_LED, HIGH);
-  } else {
-    Keyboard.release(BIND_FX_R);
-    digitalWrite(FX_R_LED, LOW);
-  }
-  
-  if(digitalRead(BT_ST) == LOW) {
-    Keyboard.press(BIND_ST);
-    digitalWrite(BT_ST_LED, HIGH);
-  } else {
-    Keyboard.release(BIND_ST);
-    digitalWrite(BT_ST_LED, LOW);
+  // Read the buttons, if it's low, output a keyboard press  
+  for (int i = 0; i < buttonCount; i++) {
+    if (digitalRead(buttonPins[i]) == LOW) {
+      Keyboard.press(bindKeys[i]);
+      digitalWrite(ledPins[i], HIGH);
+    } else {
+      Keyboard.release(bindKeys[i]);
+      digitalWrite(ledPins[i], LOW);
+    }
   }
 }
 
+/**
+ * Controller Implementation
+ */
 void joy_mode() {
   // Read buttons except BT_ST
   for (int i = 0; i < buttonCount - 1; i++) {
@@ -212,49 +184,13 @@ void joy_mode() {
   report.xAxis = (uint8_t)((int32_t)(encL.read() / ENCODER_SENSITIVITY) % 256);
   report.yAxis = (uint8_t)((int32_t)(encR.read() / ENCODER_SENSITIVITY) % 256);
   
-  // Light LEDs
+  // Reactive or HID LED switching
   if (reactiveTimeoutCount >= reactiveTimeoutMax) {
     lights(report.buttons);
   } else {
     reactiveTimeoutCount++;
     lights(iivx_led);
   }
-
-/* 
-   ------- KEYBOARD ASCII CODES -------
-  Top row keys: (use these if you don't have a numpad on your pc)
-  48 - 0
-  49 - 1
-  50 - 2
-  51 - 3
-  52 - 4
-  53 - 5
-  54 - 6
-  55 - 7
-  56 - 8
-  57 - 9
-  45 - - (minus)(default service button)
-  61 - = (equals)(default test button)
-  8 - backspace
-  
-  
-  220 NumPad /
-  221 NumPad *
-  222 NumPad -
-  223 NumPad +
-  224 NumPad ENTER
-  225 NumPad 1 and End
-  226 NumPad 2 and Down Arrow
-  227 NumPad 3 and PageDn
-  228 NumPad 4 and Left Arrow
-  229 NumPad 5
-  230 NumPad 6 and Right Arrow
-  231 NumPad 7 and Home
-  232 NumPad 8 and Up Arrow
-  233 NumPad 9 and PageUp
-  234 NumPad 0 and Insert
-  235 NumPad . and Delete
-  */
   
   iivx.setState(&report);
   delayMicroseconds(REPORT_DELAY);
