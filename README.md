@@ -95,6 +95,9 @@ A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Bas
 - Wipe circles on the bottom with rubbing/isopropyl alcohol.  Apply adhesive rubber feet.
 - Mount keycaps.  See video Part 8 for details.
 - Mount knobs.  Use the arduino pin headers as a spacer on each side so the knobs are the same height and don't rub on the encoder nub.
+- Flash firmware and setup your desired game.  See "Pocket SDVX Guide - Flash Firmware & Game Setup" for details.
+  - Arduino IDE: https://www.arduino.cc/en/main/software
+  - Konami Spoof: https://github.com/veroxzik/arduino-konami-spoof
 
 ## HID LED Assembly Instructions
 - Take off keycaps.
@@ -173,6 +176,7 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - Consider new way to secure back panel
 
 ## Finished Items from the To-Do List
+- Konami Spoof compatible
 - HID LEDs [See YouTube guide]
 - LED lights [See YouTube guide]
 - Actually make a cover vinyl that fits right [use cover_v2.png]
