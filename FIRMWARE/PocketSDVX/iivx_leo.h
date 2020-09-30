@@ -24,12 +24,6 @@
 
 #include "HID.h"
 
-#if !defined(_USING_HID)
-
-#warning "USING OLD HID CORE, UPGRADE TO ARDUINO 1.6.8"
-
-#else
-
 //  Low level key report: up to 6 keys and shift, ctrl etc at once
 extern volatile uint16_t iivx_led;
 
@@ -51,5 +45,4 @@ public:
 
 extern iivx_ iivx;
 
-#endif
 #endif

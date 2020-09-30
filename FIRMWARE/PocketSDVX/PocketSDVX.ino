@@ -16,39 +16,39 @@ int currMode = EEPROM.read(0);
 #define MOUSE_MULT  3
 
 // Button Keybinds
-#define BIND_ST   KEY_RETURN
 #define BIND_A    'a'
 #define BIND_B    's'
 #define BIND_C    'd'
 #define BIND_D    'f'
 #define BIND_FX_L 'z'
 #define BIND_FX_R 'x'
+#define BIND_ST   KEY_RETURN
 
 // Button Pinout
-#define BT_ST 4
 #define BT_A  5
 #define BT_B  6
 #define BT_C  7
 #define BT_D  8
 #define FX_L  9
 #define FX_R  10
-uint8_t buttonCount = 7;
+#define BT_ST 4
 
 // LED Pinout
-#define BT_ST_LED 16
 #define BT_A_LED  14
 #define BT_B_LED  15
 #define BT_C_LED  18
 #define BT_D_LED  19
 #define FX_L_LED  20
 #define FX_R_LED  21
+#define BT_ST_LED 16
 
 // Number of cycles before HID falls back to reactive
 unsigned long reactiveTimeoutMax = 1000;
 unsigned long reactiveTimeoutCount = reactiveTimeoutMax;
 
-uint8_t buttonPins[] = { BT_ST, BT_A, BT_B, BT_C, BT_D, FX_L, FX_R };
-uint8_t ledPins[] = { BT_ST_LED, BT_A_LED, BT_B_LED, BT_C_LED, BT_D_LED, FX_L_LED, FX_R_LED };
+uint8_t buttonPins[] = { BT_A, BT_B, BT_C, BT_D, FX_L, FX_R, BT_ST };
+uint8_t ledPins[] = { BT_A_LED, BT_B_LED, BT_C_LED, BT_D_LED, FX_L_LED, FX_R_LED, BT_ST_LED };
+uint8_t buttonCount = sizeof(buttonPins) / sizeof(buttonPins[0]);
 
 // Encoder sensitivity = number of positions per rotation times 4 (24*4) / number of positions for HID report (256)
 #define ENCODER_SENSITIVITY (double) 0.375
@@ -58,19 +58,22 @@ float knob2 = 0;
 float old_knob1 = 0;
 float old_knob2 = 0;
 
-void lights(uint8_t lightDesc) {
-  for (int i = 0; i < buttonCount; i++) {
+void lights(uint16_t lightDesc) {
+  for (int i = 0; i < buttonCount - 1; i++) {
     if ((lightDesc >> i) & 1) {
       digitalWrite(ledPins[i], HIGH);
     } else {
       digitalWrite(ledPins[i], LOW);
     }
   }
+  if ((lightDesc >> 8) & 1) {
+    digitalWrite(BT_ST_LED, HIGH);
+  } else {
+    digitalWrite(BT_ST_LED, LOW);
+  }
 }
 
 void setup() {
-  delay(500);
-  
   // Setup I/O for pins
   for (int i = 0; i < buttonCount; i++) {
     pinMode(buttonPins[i], INPUT_PULLUP);
@@ -190,13 +193,19 @@ void keyboard_mode() {
 }
 
 void joy_mode() {
-  // Read buttons
-  for (int i = 0; i < buttonCount; i++) {
+  // Read buttons except BT_ST
+  for (int i = 0; i < buttonCount - 1; i++) {
     if (digitalRead(buttonPins[i]) != HIGH) {
       report.buttons |= (uint16_t)1 << i;
     } else {
       report.buttons &= ~((uint16_t)1 << i);
     }
+  }
+  // Read BT_ST
+  if (digitalRead(BT_ST) != HIGH) {
+    report.buttons |= (uint16_t)1 << 8;
+  } else {
+    report.buttons &= ~((uint16_t)1 << 8);
   }
   
   // Read Encoders

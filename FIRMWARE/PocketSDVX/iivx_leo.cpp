@@ -32,14 +32,14 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
   	0x05, 0x01,                    /* USAGE_PAGE (Generic Desktop) */ 
     0x09, 0x05,                    /* USAGE (Game Pad) */ 
     0xa1, 0x01,                    /* COLLECTION (Application) */ 
-    0x85, 0x04,				 	   /*   REPORT_ID */ //REPORT 4
+    0x85, 0x04,				 	   /*   REPORT_ID set to 4 */
     /*Buttons */ 
     0x05, 0x09,                    /*     USAGE_PAGE (Button) */ 
     0x19, 0x01,                    /*     USAGE_MINIMUM (Button 1) */ 
-    0x29, 0x0f,                    /*     USAGE_MAXIMUM (Button 16) changed to 15*/ 
+    0x29, 0x0f,                    /*     USAGE_MAXIMUM (Button 16) */ 
     0x15, 0x00,                    /*     LOGICAL_MINIMUM (0) */ 
     0x25, 0x01,                    /*     LOGICAL_MAXIMUM (1) */ 
-    0x95, 0x0f,                    /*     REPORT_COUNT (16)  changed to 15*/ 
+    0x95, 0x0f,                    /*     REPORT_COUNT (16) */ 
     0x75, 0x01,                    /*     REPORT_SIZE (1) */ 
     0x81, 0x02,                    /*     INPUT (Data,Var,Abs) */ 
     /* Reserved byte */ 
@@ -50,17 +50,16 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0x05, 0x01,                    /*     USAGE_PAGE (Generic Desktop) */ 
     0x09, 0x30,                    /*     USAGE (X) */ 
     0x09, 0x31,                    /*     USAGE (Y) */ 
-    0x09, 0x32,                    /*     USAGE (Z) */ 
     0x15, 0x81,                    /*     LOGICAL_MINIMUM (0) */ 
     0x25, 0x7f,                    /*     LOGICAL_MAXIMUM (255) */ 
-    0x95, 0x03,                    /*     REPORT_COUNT (3) */ 
+    0x95, 0x02,                    /*     REPORT_COUNT (3) */ 
     0x75, 0x08,                    /*     REPORT_SIZE (8) */ 
     0x81, 0x02,                    /*     INPUT (Data,Var,Abs) */ 
 
     //iivx led
 
     /*Lights config*/
-    0x85, 0x05,				 /*   REPORT_ID set to 5*/ 
+    0x85, 0x05,				 /*   REPORT_ID set to 5 */ 
     0x15, 0x00,                    /*     LOGICAL_MINIMUM (0) */ 
     0x25, 0x01,                    /*     LOGICAL_MAXIMUM (1) */ 
     /*Led 1 */ 
@@ -201,7 +200,6 @@ void iivx_::setState(iivxReport_t *report)
 
 	data[2] = report->xAxis;		// X axis
 	data[3] = report->yAxis;		// Y axis
-	data[4] = report->zAxis;		// Z axis
 
 	//HID_SendReport(Report number, array of values in same order as HID descriptor, length)
 	HID().SendReport(4, data, iivxByte);
