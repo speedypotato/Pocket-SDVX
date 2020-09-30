@@ -134,7 +134,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xc0,                          /*     END_COLLECTION */ 
   	/*  Reserved 1 bit */ 
   	0x95, 0x01,						 /*   REPORT_COUNT (1) */ 
-  	0x75, 0x01,						 /*   REPORT_SIZE (5) */ 
+  	0x75, 0x01,						 /*   REPORT_SIZE (1) */ 
   	0x91, 0x03,						 /*   OUTPUT (Cnst,Var,Abs) */ 
     /*Footer */ 
     0xc0                          /* END_COLLECTION */ 
