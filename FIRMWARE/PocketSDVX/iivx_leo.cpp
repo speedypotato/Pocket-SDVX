@@ -152,29 +152,9 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
     0xc0,                          /*     END_COLLECTION */ 
-    /*Led 10 */ 
-    0x05, 0x0a,                    /*     USAGE_PAGE (Ordinals) */ 
-    0x09, 0x0a,                    /*     USAGE (Instance 10) */ 
-    0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
-    0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
-    0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
-    0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
-    0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
-    0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
-    0xc0,                          /*     END_COLLECTION */ 
-    /*Led 11 */ 
-    0x05, 0x0a,                    /*     USAGE_PAGE (Ordinals) */ 
-    0x09, 0x0b,                    /*     USAGE (Instance 11) */ 
-    0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
-    0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
-    0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
-    0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
-    0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
-    0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
-    0xc0,                          /*     END_COLLECTION */ 
   	/*  Reserved 5 bits */ 
   	0x95, 0x01,						 /*   REPORT_COUNT (1) */ 
-  	0x75, 0x05,						 /*   REPORT_SIZE (5) */ 
+  	0x75, 0x07,						 /*   REPORT_SIZE (5) */ 
   	0x91, 0x03,						 /*   OUTPUT (Cnst,Var,Abs) */ 
     /*Footer */ 
     0xc0                          /* END_COLLECTION */ 

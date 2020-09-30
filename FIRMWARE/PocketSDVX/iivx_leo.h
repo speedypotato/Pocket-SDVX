@@ -31,8 +31,7 @@ typedef struct iivxReport     // Pretty self explanitory. Simple state to store 
 {
   uint16_t  buttons;
   uint8_t   xAxis;
-  uint8_t   yAxis;
-  uint8_t   zAxis;
+  uint8_t   yAxis;\
 } iivxReport_t;
 
 class iivx_
