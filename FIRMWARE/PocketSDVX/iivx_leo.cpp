@@ -52,7 +52,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0x09, 0x31,                    /*     USAGE (Y) */ 
     0x15, 0x81,                    /*     LOGICAL_MINIMUM (0) */ 
     0x25, 0x7f,                    /*     LOGICAL_MAXIMUM (255) */ 
-    0x95, 0x02,                    /*     REPORT_COUNT (3) */ 
+    0x95, 0x02,                    /*     REPORT_COUNT (2) */ 
     0x75, 0x08,                    /*     REPORT_SIZE (8) */ 
     0x81, 0x02,                    /*     INPUT (Data,Var,Abs) */ 
 
