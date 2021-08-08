@@ -1,6 +1,8 @@
 # Pocket-SDVX
 A mini controller for games such as Sound Voltex, USC, KShoot, osu 4k, etc.  Based off of mon's Pocket Voltex and Cammy's pocketvtx!
 
+Although I won't be selling this particular design anymore, I have plans to sell other miniature controller designs soon.  Join the discord for discussion and support! https://discord.gg/MmuKd73XbY
+
 ![Pocket SDVX 14](IMAGES/10.jpg)
 
 ![Pocket SDVX](IMAGES/5.jpg)
