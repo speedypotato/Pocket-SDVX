@@ -24,6 +24,48 @@ volatile uint16_t iivx_led = 0;
 
 unsigned long extern reactiveTimeoutCount;
 
+#if KONAMI_SPOOF == 1
+const DeviceDescriptor PROGMEM USB_DeviceDescriptorIAD =
+  D_DEVICE(0xEF,0x02,0x01,64,0x1ccf,0x101c,0x100,IMANUFACTURER,IPRODUCT,ISERIAL,1);
+const char* const PROGMEM String_Manufacturer = "Konami Amusement";
+const char* const PROGMEM String_Product = "SOUND VOLTEX controller";
+#else
+/* HID descriptor strings */
+const char* const PROGMEM String_Manufacturer = "SpeedyPotato";
+const char* const PROGMEM String_Product = "Pocket SDVX";
+#endif
+const char* const PROGMEM String_Serial = "SDVX";
+
+const char* const PROGMEM LEDString_00 = "Button A";
+const char* const PROGMEM LEDString_01 = "Button B";
+const char* const PROGMEM LEDString_02 = "Button C";
+const char* const PROGMEM LEDString_03 = "Button D";
+const char* const PROGMEM LEDString_04 = "Button FX-L";
+const char* const PROGMEM LEDString_05 = "Button FX-R";
+const char* const PROGMEM LEDString_06 = "Button Start";
+
+const char* String_indiv[] = {LEDString_00,LEDString_01,LEDString_02,LEDString_03,LEDString_04,LEDString_05,LEDString_06};
+uint8_t STRING_ID_Count = 7;
+
+static bool SendControl(uint8_t d)
+{
+  return USB_SendControl(0, &d, 1) == 1;
+}
+
+static bool USB_SendStringDescriptor(const char *string_P, uint8_t string_len, uint8_t flags) {
+        SendControl(2 + string_len * 2);
+        SendControl(3);
+        bool pgm = flags & TRANSFER_PGM;
+        for(uint8_t i = 0; i < string_len; i++) {
+                bool r = SendControl(pgm ? pgm_read_byte(&string_P[i]) : string_P[i]);
+                r &= SendControl(0); // high byte
+                if(!r) {
+                        return false;
+                }
+        }
+        return true;
+}
+
 HID_& HID()
 {
 	static HID_ obj;
@@ -43,6 +85,26 @@ int HID_::getInterface(uint8_t* interfaceCount)
 
 int HID_::getDescriptor(USBSetup& setup)
 {
+#if KONAMI_SPOOF == 1  
+    if(setup.wValueH == USB_DEVICE_DESCRIPTOR_TYPE) {
+        return USB_SendControl(TRANSFER_PGM, (const uint8_t*)&USB_DeviceDescriptorIAD, sizeof(USB_DeviceDescriptorIAD));
+    }
+#endif
+  if (setup.wValueH == USB_STRING_DESCRIPTOR_TYPE) { 
+      if (setup.wValueL == IPRODUCT) {
+          return USB_SendStringDescriptor(String_Product, strlen(String_Product), 0);
+      } 
+      else if (setup.wValueL == IMANUFACTURER) {
+          return USB_SendStringDescriptor(String_Manufacturer, strlen(String_Manufacturer), 0);
+      }        
+      else if (setup.wValueL == ISERIAL) {
+          return USB_SendStringDescriptor(String_Serial, strlen(String_Serial), 0);
+      }
+      else if(setup.wValueL >= STRING_ID_Base && setup.wValueL < (STRING_ID_Base + STRING_ID_Count)) {
+          return USB_SendStringDescriptor(String_indiv[setup.wValueL - STRING_ID_Base], strlen(String_indiv[setup.wValueL - STRING_ID_Base]), 0);
+      }                       
+  }
+    
 	// Check if this is a HID Class Descriptor request
 	if (setup.bmRequestType != REQUEST_DEVICETOHOST_STANDARD_INTERFACE) { return 0; }
 	if (setup.wValueH != HID_REPORT_DESCRIPTOR_TYPE) { return 0; }
@@ -64,16 +126,6 @@ int HID_::getDescriptor(USBSetup& setup)
 	protocol = HID_REPORT_PROTOCOL;
 	
 	return total;
-}
-
-uint8_t HID_::getShortName(char *name)
-{
-	name[0] = 'H';
-	name[1] = 'I';
-	name[2] = 'D';
-	name[3] = 'A' + (descriptorSize & 0x0F);
-	name[4] = 'A' + ((descriptorSize >> 4) & 0x0F);
-	return 5;
 }
 
 void HID_::AppendDescriptor(HIDSubDescriptor *node)
