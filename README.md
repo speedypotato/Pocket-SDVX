@@ -99,7 +99,7 @@ Although I won't be selling this particular design anymore, I have plans to sell
 - Mount knobs.  Use the arduino pin headers as a spacer on each side so the knobs are the same height and don't rub on the encoder nub.
 - Flash firmware and setup your desired game.  See "Pocket SDVX Guide - Flash Firmware & Game Setup" for details.
   - Arduino IDE: https://www.arduino.cc/en/main/software
-  - Konami Spoof: https://github.com/veroxzik/arduino-konami-spoof
+  - KONAMI SPOOF NO LONGER NEEDED - JUST SELECT "ARDUINO LEONARDO"
 
 ## HID LED Assembly Instructions
 - Take off keycaps.
@@ -162,6 +162,7 @@ NOTE: Links dead?  See /IMAGES/screenshots/ for an example of what you are looki
 - Everyone in the Cons & Stuff Discord channel.
 - mon for his initial development of the Pocket Voltex.
 - The 10 people who purchased my first exclusive batch of Pocket SDVXs!  Thanks to you guys, I can get a full-size controller as well!
+- CrazyRedMachine for HID stuff
 
 ![10 Pocket SDVX](IMAGES/3.jpg)
 
