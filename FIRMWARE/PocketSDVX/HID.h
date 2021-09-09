@@ -24,6 +24,9 @@
 
 #if defined(USBCON)
 
+#define KONAMI_SPOOF 1
+#define STRING_ID_Base 4
+
 #define _USING_HID
 
 // HID 'Driver'
@@ -100,7 +103,6 @@ protected:
   int getInterface(uint8_t* interfaceCount);
   int getDescriptor(USBSetup& setup);
   bool setup(USBSetup& setup);
-  uint8_t getShortName(char* name);
 
 private:
   uint8_t epType[1];

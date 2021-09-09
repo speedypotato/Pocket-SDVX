@@ -30,7 +30,7 @@
 static const uint8_t _hidReportDescriptor[] PROGMEM = {
 
   	0x05, 0x01,                    /* USAGE_PAGE (Generic Desktop) */ 
-    0x09, 0x05,                    /* USAGE (Game Pad) */ 
+    0x09, 0x04,                    /* USAGE (Joystick) */ 
     0xa1, 0x01,                    /* COLLECTION (Application) */ 
     0x85, 0x04,				 	   /*   REPORT_ID set to 4 */
     /*Buttons */ 
@@ -51,7 +51,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0x09, 0x30,                    /*     USAGE (X) */ 
     0x09, 0x31,                    /*     USAGE (Y) */ 
     0x15, 0x81,                    /*     LOGICAL_MINIMUM (0) */ 
-    0x25, 0x7f,                    /*     LOGICAL_MAXIMUM (255) */ 
+    0x25, 0x7f,                    /*     LOGICAL_MAXIMUM (127) */ 
     0x95, 0x02,                    /*     REPORT_COUNT (2) */ 
     0x75, 0x08,                    /*     REPORT_SIZE (8) */ 
     0x81, 0x02,                    /*     INPUT (Data,Var,Abs) */ 
@@ -68,6 +68,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
     0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
     0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
+    0x79, 0x04,                    /*       STRING_INDEX (04) */
     0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
@@ -78,6 +79,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
     0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
     0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
+    0x79, 0x05,                    /*       STRING_INDEX (05) */
     0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
@@ -88,6 +90,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
     0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
     0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
+    0x79, 0x06,                    /*       STRING_INDEX (06) */
     0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
@@ -98,6 +101,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
     0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
     0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
+    0x79, 0x07,                    /*       STRING_INDEX (07) */
     0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
@@ -108,6 +112,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
     0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
     0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
+    0x79, 0x08,                    /*       STRING_INDEX (08) */
     0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
@@ -118,6 +123,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
     0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
     0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
+    0x79, 0x09,                    /*       STRING_INDEX (09) */
     0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
@@ -128,6 +134,7 @@ static const uint8_t _hidReportDescriptor[] PROGMEM = {
     0xa1, 0x02,                    /*     COLLECTION (Logical) */ 
     0x05, 0x08,                    /*       USAGE_PAGE (LEDs) */ 
     0x09, 0x4b,                    /*       USAGE (Generic Indicator 1) */ 
+    0x79, 0x0a,                    /*       STRING_INDEX (10) */
     0x75, 0x01,                    /*       REPORT_SIZE (1) */ 
     0x95, 0x01,                    /*       REPORT_COUNT (1) */ 
     0x91, 0x02,                    /*       OUTPUT (Data,Var,Abs) */ 
