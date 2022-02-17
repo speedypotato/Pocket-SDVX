@@ -86,7 +86,7 @@ Although I won't be selling this particular design anymore, I have plans to sell
     - BT_D    8
     - FX_L    9
     - FX_R    10
-- Plug in your arduino and flash firmware.  See video Part 4 for details.
+- Plug in your arduino and flash firmware.  See video Part 4 for details.  Note: If you are running into the "Using OLD HID" error, try enabling verbose compilation output under File > Preferences > Show Verbose Output during [compilation] and uploading again.  For some reason, this fixes it for me most of the time.
 - BOOT IN KEYBOARD MODE(Hold the second button from the left for 3-4s while plugging it in).  TEST to make sure everything works.  See video Part 5 for details.
 - Plug in micro usb to USB-C adapter cable into the arduino.  Slide arduino into its slot and route the USB-C cable.  See video Part 6 for details.
 - Push encoders through their holes.  Mount with washer and nut.
